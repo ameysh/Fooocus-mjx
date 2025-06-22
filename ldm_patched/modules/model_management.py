@@ -43,7 +43,7 @@ if args.directml is not None:
         directml_device = torch_directml.device(device_index)
     print("Using directml with device:", torch_directml.device_name(device_index))
     # torch_directml.disable_tiled_resources(True)
-    lowvram_available = False #TODO: need to find a way to get free memory in directml before this can be enabled by default.
+    lowvram_available = True  # Enable lowvram for DirectML - improved memory management
 
 try:
     import intel_extension_for_pytorch as ipex
@@ -719,6 +719,10 @@ def should_use_fp16(device=None, model_params=0, prioritize_performance=True):
         return False
 
     if directml_enabled:
+        # Enable FP16 for DirectML with sufficient VRAM (AMD RX 7600 XT has 16GB)
+        total_vram_gb = get_total_memory(get_torch_device()) / (1024 * 1024 * 1024)
+        if total_vram_gb >= 8:  # Enable FP16 for GPUs with 8GB+ VRAM
+            return True
         return False
 
     if cpu_mode() or mps_mode():
