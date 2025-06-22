@@ -183,6 +183,10 @@ try:
     if is_intel_xpu():
         if args.attention_split == False and args.attention_quad == False:
             ENABLE_PYTORCH_ATTENTION = True
+    if directml_enabled:
+        # Enable PyTorch attention for DirectML - AMD RDNA 3 should support this
+        if args.attention_split == False and args.attention_quad == False:
+            ENABLE_PYTORCH_ATTENTION = True
 except:
     pass
 
@@ -201,9 +205,26 @@ elif args.vae_in_fp32:
 
 
 if ENABLE_PYTORCH_ATTENTION:
-    torch.backends.cuda.enable_math_sdp(True)
-    torch.backends.cuda.enable_flash_sdp(True)
-    torch.backends.cuda.enable_mem_efficient_sdp(True)
+    # Enable PyTorch attention backends
+    if is_nvidia():
+        # CUDA-specific backends for NVIDIA
+        torch.backends.cuda.enable_math_sdp(True)
+        torch.backends.cuda.enable_flash_sdp(True)
+        torch.backends.cuda.enable_mem_efficient_sdp(True)
+    elif directml_enabled:
+        # For DirectML, try to enable general attention backends
+        try:
+            torch.backends.cuda.enable_math_sdp(True)
+            torch.backends.cuda.enable_mem_efficient_sdp(True)
+            # Note: Flash attention might not be available for DirectML
+        except:
+            # Fallback if CUDA backends don't work with DirectML
+            pass
+    else:
+        # Default behavior for other devices
+        torch.backends.cuda.enable_math_sdp(True)
+        torch.backends.cuda.enable_flash_sdp(True)
+        torch.backends.cuda.enable_mem_efficient_sdp(True)
 
 if args.always_low_vram:
     set_vram_to = VRAMState.LOW_VRAM
