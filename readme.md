@@ -1,26 +1,34 @@
-<div align=center>
-<img src="https://github.com/lllyasviel/Fooocus/assets/19834515/483fb86d-c9a2-4c20-997c-46dafc124f25">
+<div align="center">
+  <img src="https://github.com/lllyasviel/Fooocus/assets/19834515/483fb86d-c9a2-4c20-997c-46dafc124f25" alt="Fooocus Banner">
 </div>
 
-# Fooocus
+# Fooocus-mjx
 
-[>>> Click Here to Install Fooocus <<<](#download)
+> A customized fork of [Fooocus](https://github.com/lllyasviel/Fooocus) – extended and tuned to fit new workflows and preferences.
 
-Fooocus is an image generating software (based on [Gradio](https://www.gradio.app/) <a href='https://github.com/gradio-app/gradio'><img src='https://img.shields.io/github/stars/gradio-app/gradio'></a>).
+**Fooocus-mjx** is a personalized version of the original Fooocus project, an offline, open-source image generation tool built on [Gradio](https://www.gradio.app/). Like the original, this version removes the need for manual tweaking — letting users focus on prompts and creativity — while introducing customizations and adjustments unique to this fork.
 
-Fooocus presents a rethinking of image generator designs. The software is offline, open source, and free, while at the same time, similar to many online image generators like Midjourney, the manual tweaking is not needed, and users only need to focus on the prompts and images. Fooocus has also simplified the installation: between pressing "download" and generating the first image, the number of needed mouse clicks is strictly limited to less than 3. Minimal GPU memory requirement is 4GB (Nvidia).
+- ⚙️ Built for ease of use with minimal setup
+- 🖼️ Outputs high-quality images using Stable Diffusion XL
+- 🎛️ Optimized for fast, prompt-driven workflows
+- 💻 Requires a minimum of 4GB Nvidia GPU memory. AMD GPUs are also supported via DirectML, but performance may be reduced due to current limitations on the AMD side.
 
-**Recently many fake websites exist on Google when you search “fooocus”. Do not trust those – here is the only official source of Fooocus.**
+---
 
-# Project Status: Limited Long-Term Support (LTS) with Bug Fixes Only
+## About the Original Project: Fooocus
 
-The Fooocus project, built entirely on the **Stable Diffusion XL** architecture, is now in a state of limited long-term support (LTS) with bug fixes only. As the existing functionalities are considered as nearly free of programmartic issues (Thanks to [mashb1t](https://github.com/mashb1t)'s huge efforts), future updates will focus exclusively on addressing any bugs that may arise. 
+This project is a fork of [Fooocus](https://github.com/lllyasviel/Fooocus) by [lllyasviel](https://github.com/lllyasviel), licensed under the **GNU General Public License v3.0**. The original Fooocus is now in **limited long-term support**, receiving only bug fixes.
 
-**There are no current plans to migrate to or incorporate newer model architectures.** However, this may change during time with the development of open-source community. For example, if the community converge to one single dominant method for image generation (which may really happen in half or one years given the current status), Fooocus may also migrate to that exact method.
+For users interested in experimenting with other models like **Flux**, consider these alternatives from the broader community:
+- [WebUI Forge](https://github.com/lllyasviel/stable-diffusion-webui-forge)
+- [ComfyUI / SwarmUI](https://github.com/comfyanonymous/ComfyUI)
+- Or browse various [community forks](https://github.com/lllyasviel/Fooocus?tab=readme-ov-file#forks)
 
-For those interested in utilizing newer models such as **Flux**, we recommend exploring alternative platforms such as [WebUI Forge](https://github.com/lllyasviel/stable-diffusion-webui-forge) (also from us), [ComfyUI/SwarmUI](https://github.com/comfyanonymous/ComfyUI). Additionally, several [excellent forks of Fooocus](https://github.com/lllyasviel/Fooocus?tab=readme-ov-file#forks) are available for experimentation.
+⚠️ **Important:** Fooocus and Fooocus-mjx do **not** have any commercial or official web domain. Avoid fake websites such as:
+> fooocus.com, fooocus.ai, fooocus.pro, etc.
 
-Again, recently many fake websites exist on Google when you search “fooocus”. Do **NOT** get Fooocus from those websites – this page is the only official source of Fooocus. We never have any website like such as “fooocus.com”, “fooocus.net”, “fooocus.co”, “fooocus.ai”, “fooocus.org”, “fooocus.pro”, “fooocus.one”. Those websites are ALL FAKE. **They have ABSOLUTLY no relationship to us. Fooocus is a 100% non-commercial offline open-source software.**
+These are **not affiliated** with the original project or this fork. Fooocus-mjx is a 100% offline, open-source, non-commercial software.
+
 
 # Features
 
