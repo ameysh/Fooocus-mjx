@@ -43,7 +43,7 @@ if args.directml is not None:
         directml_device = torch_directml.device(device_index)
     print("Using directml with device:", torch_directml.device_name(device_index))
     # torch_directml.disable_tiled_resources(True)
-    lowvram_available = True  # Enable lowvram for DirectML - improved memory management
+    lowvram_available = False #TODO: need to find a way to get free memory in directml before this can be enabled by default.
 
 try:
     import intel_extension_for_pytorch as ipex
@@ -183,21 +183,11 @@ try:
     if is_intel_xpu():
         if args.attention_split == False and args.attention_quad == False:
             ENABLE_PYTORCH_ATTENTION = True
-    if directml_enabled:
-        # Enable PyTorch attention for DirectML - AMD RDNA 3 should support this
-        if args.attention_split == False and args.attention_quad == False:
-            ENABLE_PYTORCH_ATTENTION = True
 except:
     pass
 
 if is_intel_xpu():
     VAE_DTYPE = torch.bfloat16
-
-if directml_enabled:
-    # Enable FP16 VAE for DirectML with sufficient VRAM (AMD RX 7600 XT has 16GB)
-    total_vram_gb = get_total_memory(get_torch_device()) / (1024 * 1024 * 1024)
-    if total_vram_gb >= 8:  # Enable FP16 VAE for GPUs with 8GB+ VRAM
-        VAE_DTYPE = torch.float16
 
 if args.vae_in_cpu:
     VAE_DTYPE = torch.float32
@@ -211,26 +201,9 @@ elif args.vae_in_fp32:
 
 
 if ENABLE_PYTORCH_ATTENTION:
-    # Enable PyTorch attention backends
-    if is_nvidia():
-        # CUDA-specific backends for NVIDIA
-        torch.backends.cuda.enable_math_sdp(True)
-        torch.backends.cuda.enable_flash_sdp(True)
-        torch.backends.cuda.enable_mem_efficient_sdp(True)
-    elif directml_enabled:
-        # For DirectML, try to enable general attention backends
-        try:
-            torch.backends.cuda.enable_math_sdp(True)
-            torch.backends.cuda.enable_mem_efficient_sdp(True)
-            # Note: Flash attention might not be available for DirectML
-        except:
-            # Fallback if CUDA backends don't work with DirectML
-            pass
-    else:
-        # Default behavior for other devices
-        torch.backends.cuda.enable_math_sdp(True)
-        torch.backends.cuda.enable_flash_sdp(True)
-        torch.backends.cuda.enable_mem_efficient_sdp(True)
+    torch.backends.cuda.enable_math_sdp(True)
+    torch.backends.cuda.enable_flash_sdp(True)
+    torch.backends.cuda.enable_mem_efficient_sdp(True)
 
 if args.always_low_vram:
     set_vram_to = VRAMState.LOW_VRAM
@@ -746,10 +719,6 @@ def should_use_fp16(device=None, model_params=0, prioritize_performance=True):
         return False
 
     if directml_enabled:
-        # Enable FP16 for DirectML with sufficient VRAM (AMD RX 7600 XT has 16GB)
-        total_vram_gb = get_total_memory(get_torch_device()) / (1024 * 1024 * 1024)
-        if total_vram_gb >= 8:  # Enable FP16 for GPUs with 8GB+ VRAM
-            return True
         return False
 
     if cpu_mode() or mps_mode():
