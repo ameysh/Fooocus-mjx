@@ -193,6 +193,12 @@ except:
 if is_intel_xpu():
     VAE_DTYPE = torch.bfloat16
 
+if directml_enabled:
+    # Enable FP16 VAE for DirectML with sufficient VRAM (AMD RX 7600 XT has 16GB)
+    total_vram_gb = get_total_memory(get_torch_device()) / (1024 * 1024 * 1024)
+    if total_vram_gb >= 8:  # Enable FP16 VAE for GPUs with 8GB+ VRAM
+        VAE_DTYPE = torch.float16
+
 if args.vae_in_cpu:
     VAE_DTYPE = torch.float32
 
