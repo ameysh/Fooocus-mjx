@@ -99,7 +99,7 @@ def get_total_memory(dev=None, torch_total_too=False):
         mem_total_torch = mem_total
     else:
         if directml_enabled:
-            mem_total = 12 * 1024 * 1024 * 1024 #12 GB VRAM
+            mem_total = 12 * 1024 * 1024 * 1024 # Force to use 12 GB VRAM instead of 1 GB, this improves performance, adjust according to your GPU
             mem_total_torch = mem_total
         elif is_intel_xpu():
             stats = torch.xpu.memory_stats(dev)
@@ -659,7 +659,7 @@ def get_free_memory(dev=None, torch_free_too=False):
         mem_free_torch = mem_free_total
     else:
         if directml_enabled:
-            mem_free_total = 12 * 1024 * 1024 * 1024 #12 GB VRAM
+            mem_free_total = 12 * 1024 * 1024 * 1024 # Force to use 12 GB VRAM instead of 1 GB, this improves performance, adjust according to your GPU
             mem_free_torch = mem_free_total
         elif is_intel_xpu():
             stats = torch.xpu.memory_stats(dev)
@@ -718,7 +718,12 @@ def should_use_fp16(device=None, model_params=0, prioritize_performance=True):
     if FORCE_FP32:
         return False
 
+    # Enable FP16 for GPUs with 8GB+ VRAM
+    # This prevents the system from lagging during image generation (for the most part)
     if directml_enabled:
+        total_vram_gb = get_total_memory(get_torch_device()) / (1024 * 1024 * 1024)
+        if total_vram_gb >= 8:  
+            return True
         return False
 
     if cpu_mode() or mps_mode():
