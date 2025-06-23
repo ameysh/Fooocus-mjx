@@ -130,6 +130,7 @@ class OutputFormat(Enum):
 
 class PerformanceLoRA(Enum):
     QUALITY = None
+    BALANCED = None
     SPEED = None
     HIGH_SPEED = None
     ULTRA_SPEED = None
@@ -140,6 +141,7 @@ class PerformanceLoRA(Enum):
 
 class Steps(IntEnum):
     QUALITY = 60
+    BALANCED = 45
     SPEED = 30
     HIGH_SPEED = 25
     ULTRA_SPEED = 16
@@ -154,6 +156,7 @@ class Steps(IntEnum):
 
 class StepsUOV(IntEnum):
     QUALITY = 36
+    BALANCED = 27
     SPEED = 18
     HIGH_SPEED = 25
     ULTRA_SPEED = 16
@@ -164,6 +167,7 @@ class StepsUOV(IntEnum):
 
 class Performance(Enum):
     QUALITY = 'Quality'
+    BALANCED = 'Balanced'
     SPEED = 'Speed'
     HIGH_SPEED = 'High Speed'
     ULTRA_SPEED = 'Ultra Speed'
