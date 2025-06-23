@@ -166,14 +166,14 @@ class StepsUOV(IntEnum):
 
 
 class Performance(Enum):
-    QUALITY = 'Quality'
-    BALANCED = 'Balanced'
-    SPEED = 'Speed'
-    HIGH_SPEED = 'High Speed'
-    ULTRA_SPEED = 'Ultra Speed'
-    EXTREME_SPEED = 'Extreme Speed'
-    LIGHTNING = 'Lightning'
-    HYPER_SD = 'Hyper-SD'
+    QUALITY = 'Quality (60 steps)'
+    BALANCED = 'Balanced (45 steps)'
+    SPEED = 'Speed (30 steps)'
+    HIGH_SPEED = 'High Speed (25 steps)'
+    ULTRA_SPEED = 'Ultra Speed (16 steps)'
+    EXTREME_SPEED = 'Extreme Speed (8 steps, LCM, fixed CFG)'
+    LIGHTNING = 'Lightning (4 steps, custom sampler/scheduler)'
+    HYPER_SD = 'Hyper-SD (4 steps, custom sampler/scheduler)'
 
     @classmethod
     def list(cls) -> list:
