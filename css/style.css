@@ -112,7 +112,7 @@ div:has(> #positive_prompt) {
 }
 
 .performance_selection label {
-    width: 140px !important;
+    width: 240px !important;
 }
 
 .aspect_ratios label {

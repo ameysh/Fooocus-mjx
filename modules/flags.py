@@ -130,7 +130,10 @@ class OutputFormat(Enum):
 
 class PerformanceLoRA(Enum):
     QUALITY = None
+    BALANCED = None
     SPEED = None
+    HIGH_SPEED = None
+    ULTRA_SPEED = None
     EXTREME_SPEED = 'sdxl_lcm_lora.safetensors'
     LIGHTNING = 'sdxl_lightning_4step_lora.safetensors'
     HYPER_SD = 'sdxl_hyper_sd_4step_lora.safetensors'
@@ -138,7 +141,10 @@ class PerformanceLoRA(Enum):
 
 class Steps(IntEnum):
     QUALITY = 60
+    BALANCED = 45
     SPEED = 30
+    HIGH_SPEED = 25
+    ULTRA_SPEED = 16
     EXTREME_SPEED = 8
     LIGHTNING = 4
     HYPER_SD = 4
@@ -150,18 +156,24 @@ class Steps(IntEnum):
 
 class StepsUOV(IntEnum):
     QUALITY = 36
+    BALANCED = 27
     SPEED = 18
+    HIGH_SPEED = 25
+    ULTRA_SPEED = 16
     EXTREME_SPEED = 8
     LIGHTNING = 4
     HYPER_SD = 4
 
 
 class Performance(Enum):
-    QUALITY = 'Quality'
-    SPEED = 'Speed'
-    EXTREME_SPEED = 'Extreme Speed'
-    LIGHTNING = 'Lightning'
-    HYPER_SD = 'Hyper-SD'
+    QUALITY = 'Quality (60 steps)'
+    BALANCED = 'Balanced (45 steps)'
+    SPEED = 'Speed (30 steps)'
+    HIGH_SPEED = 'High Speed (25 steps)'
+    ULTRA_SPEED = 'Ultra Speed (16 steps)'
+    EXTREME_SPEED = 'Extreme Speed (8 steps, LCM, fixed CFG)'
+    LIGHTNING = 'Lightning (4 steps, custom sampler/scheduler)'
+    HYPER_SD = 'Hyper-SD (4 steps, custom sampler/scheduler)'
 
     @classmethod
     def list(cls) -> list:

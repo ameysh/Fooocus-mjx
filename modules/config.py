@@ -357,7 +357,7 @@ default_sample_sharpness = get_config_item_or_set_default(
 )
 default_sampler = get_config_item_or_set_default(
     key='default_sampler',
-    default_value='dpmpp_2m_sde_gpu',
+    default_value='dpmpp_2m_sde',
     validator=lambda x: x in modules.flags.sampler_list,
     expected_type=str
 )

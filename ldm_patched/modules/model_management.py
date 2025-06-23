@@ -99,7 +99,12 @@ def get_total_memory(dev=None, torch_total_too=False):
         mem_total_torch = mem_total
     else:
         if directml_enabled:
-            mem_total = 1024 * 1024 * 1024 #TODO
+            # Experimental
+            # Force to use 12 GB VRAM
+            # Tested on AMD Radeon RX 7600 XT with 16 GB VRAM
+            # This value should be adjusted according to your GPU
+            # Initial tests show that this improves performance without any issues
+            mem_total = 12 * 1024 * 1024 * 1024
             mem_total_torch = mem_total
         elif is_intel_xpu():
             stats = torch.xpu.memory_stats(dev)
@@ -659,7 +664,12 @@ def get_free_memory(dev=None, torch_free_too=False):
         mem_free_torch = mem_free_total
     else:
         if directml_enabled:
-            mem_free_total = 1024 * 1024 * 1024 #TODO
+            # Experimental
+            # Force to use 12 GB VRAM
+            # Tested on AMD Radeon RX 7600 XT with 16 GB VRAM
+            # This value should be adjusted according to your GPU
+            # Initial tests show that this improves performance without any issues
+            mem_free_total = 12 * 1024 * 1024 * 1024
             mem_free_torch = mem_free_total
         elif is_intel_xpu():
             stats = torch.xpu.memory_stats(dev)

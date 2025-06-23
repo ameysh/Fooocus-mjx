@@ -563,7 +563,7 @@ with shared.gradio_root:
                                                    value=args_manager.args.preset if args_manager.args.preset else "initial",
                                                    interactive=True)
 
-                performance_selection = gr.Radio(label='Performance',
+                performance_selection = gr.Dropdown(label='Performance',
                                                  choices=flags.Performance.values(),
                                                  value=modules.config.default_performance,
                                                  elem_classes=['performance_selection'])
