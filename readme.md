@@ -1,8 +1,8 @@
 # Fooocus-MJX
 
-**Fooocus-MJX** is a personal and experimental fork of the original [Fooocus](https://github.com/lllyasviel/Fooocus) image generation tool. This fork focuses on enhancing compatibility and performance for AMD GPUs using [DirectML](https://github.com/microsoft/DirectML), along with several user interface and usability improvements.
+**Fooocus-MJX** is a personal and experimental fork of the [Fooocus](https://github.com/lllyasviel/Fooocus) image generation tool. This fork focuses on enhancing compatibility and performance for AMD GPUs using [DirectML](https://github.com/microsoft/DirectML), along with several user interface and usability improvements.
 
-> ⚠️ **Note**: This is not an official Fooocus release. It is intended for personal use and experimentation.
+> ⚠️ **Important**: This is not an official Fooocus release. The changes are specific to AMD GPUs using DirectML on Windows. Everything is experimental and might break things. If you have an NVIDIA GPU then please use the original [Fooocus](https://github.com/lllyasviel/Fooocus) instead.
 
 ---
 
@@ -52,7 +52,7 @@ This fork preserves the core structure of Fooocus.
 
 - This fork is experimental and provided **“as is”**, without any warranty, express or implied, including but not limited to merchantability or fitness for a particular purpose.  
 - Use this software at your own risk. The maintainer is not liable for any damages or data loss resulting from its use.  
-- This fork attempts to optimize performance for AMD GPUs using DirectML but may not function optimally on AMD or other hardware configurations.
+- This fork attempts to optimize performance for AMD GPUs using DirectML but may not function optimally on all AMD GPUs or other hardware configurations.
 
 ---
 
