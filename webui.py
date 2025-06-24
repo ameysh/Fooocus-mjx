@@ -1110,6 +1110,11 @@ with shared.gradio_root:
                 .then(fn=style_sorter.sort_styles, inputs=style_selections, outputs=style_selections, queue=False, show_progress=False) \
                 .then(lambda: None, _js='()=>{refresh_style_localization();}')
 
+    # GitHub repository link footer
+    gr.HTML('<div style="text-align: center; margin-top: 20px; padding: 10px; border-top: 1px solid #ccc;">'
+            '<a href="https://github.com/ameysh/Fooocus-mjx" target="_blank" style="color: #fff; text-decoration: none;">'
+            'Fooocus-mjx on GitHub</a></div>')
+
 def dump_default_english_config():
     from modules.localization import dump_english_config
     dump_english_config(grh.all_components)
